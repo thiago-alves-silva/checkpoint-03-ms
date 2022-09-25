@@ -30,10 +30,10 @@ exports.post = async (req, res) => {
       emailTo: "rm86070@fiap.com.br",
       subject: `${req.body.name} inserido com sucesso!`,
       text:
-        "Produto inserido na base de dados:\n" +
-        "Nome: ${req.body.name}\n" +
-        "Preço: R$ ${req.body.price}\n" +
-        "Quantidade: ${req.body.quantity}",
+        `Produto inserido na base de dados:\n` +
+        `Nome: ${req.body.name}\n` +
+        `Preço: R$ ${req.body.price}\n` +
+        `Quantidade: ${req.body.quantity}`,
     };
     await axios({
       url: "http://localhost:8080/send-email",
