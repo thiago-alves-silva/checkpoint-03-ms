@@ -23,22 +23,23 @@ exports.post = async (req, res) => {
     req.body.sku = Math.round(Math.random() * 8999 + 1000);
     console.log(req.body);
     const product = await Product.create(req.body);
+    res.status(200).json(product);
 
     const mailBody = {
       emailFrom: "vitormiriani01@gmail.com",
       emailTo: "rm86070@fiap.com.br",
       subject: `${req.body.name} inserido com sucesso!`,
-      text: `Produto inserido na base de dados:\n
-              Nome: ${req.body.name}\n
-              Preço: R$ ${req.body.price}\n
-              Quantidade: ${req.body.quantity}`,
+      text:
+        "Produto inserido na base de dados:\n" +
+        "Nome: ${req.body.name}\n" +
+        "Preço: R$ ${req.body.price}\n" +
+        "Quantidade: ${req.body.quantity}",
     };
-    axios({
+    await axios({
       url: "http://localhost:8080/send-email",
       method: "post",
       data: mailBody,
     });
-    res.status(200).json(product);
   } catch (error) {
     res.status(400).send(error);
   }
